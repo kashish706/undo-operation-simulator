@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Undo Simulator</title>
+  <style>
+    body {
+      font-family: Arial;
+      padding: 40px;
+      background: #f5f5f5;
+      display: flex;
+      justify-content: center;
+    }
+
+    .box {
+      background: white;
+      padding: 40px 32px;
+      border-radius: 16px;
+      width: 520px;
+      box-shadow: 0 0 18px rgba(0,0,0,0.13);
+    }
+
+    h3 {
+      text-align: center;
+      font-size: 2.2em;
+      margin-bottom: 28px;
+      color: black;
+      letter-spacing: 1px;
+    }
+
+    input {
+      width: 60px;
+      padding: 10px;
+      font-size: 1.4em;
+      text-align: center;
+      border: 2px solid #bbb;
+      border-radius: 6px;
+      transition: border 0.2s;
+    }
+    input:focus {
+      border: 2px solid #2196f3;
+      background: #e3f2fd;
+      outline: none;
+    }
+
+    button {
+      padding: 10px 22px;
+      margin: 8px;
+      font-size: 1.1em;
+      cursor: pointer;
+      border: none;
+      border-radius: 6px;
+      transition: background 0.2s;
+      color: white;
+    }
+    button[onclick*="typeChar"] {
+      background: #43a047;
+    }
+    button[onclick*="typeChar"]:hover {
+      background: #388e3c;
+    }
+    button[onclick*="undo"] {
+      background: #ff9800;
+    }
+    button[onclick*="undo"]:hover {
+      background: #f57c00;
+    }
+
+    .output {
+      margin: 22px 0;
+      font-size: 1.5em;
+      font-weight: bold;
+      color: #1976d2;
+      background: #e3f2fd;
+      border-radius: 6px;
+      padding: 14px;
+      text-align: center;
+    }
+
+    .stack {
+      background: linear-gradient(90deg, #f8bbd0 0%, #bbdefb 100%);
+      padding: 18px;
+      border-radius: 10px;
+      font-family: monospace;
+      margin-top: 18px;
+      box-shadow: 0 2px 8px #0001;
+      font-size: 1.2em;
+    }
+
+    .stack div {
+      padding: 7px;
+      margin: 4px 0;
+      border-radius: 6px;
+      transition: background 0.2s;
+    }
+
+    .stack .current {
+      background: #00bcd4;
+      color: #fff;
+      font-weight: bold;
+      box-shadow: 0 0 8px #00bcd488;
+      border: 2px solid #0097a7;
+    }
+  </style>
+</head>
+<body>
+
+<div class="box">
+  <h3>Undo Operation Simulator</h3>
+
+  <input type="text" id="charInput" maxlength="1" placeholder="a-z">
+  <button onclick="typeChar()">Type</button>
+  <button onclick="undo()">Undo</button>
+
+  <div class="output" id="currentText">Current: (empty)</div>
+
+  <div class="stack" id="stackBox">
+    <!-- Stack will appear here -->
+  </div>
+</div>
+
+<script>
+  const history = [""];
+  let current = "";
+
+  function updateUI() {
+    document.getElementById("currentText").textContent = 
+      current === "" ? "Current: (empty)" : "Current: " + current;
+
+    const stackBox = document.getElementById("stackBox");
+    stackBox.innerHTML = "";
+
+    history.forEach((item, index) => {
+      const div = document.createElement("div");
+      div.textContent = `"${item}"`;
+      if (index === history.length - 1) {
+        div.classList.add("current");
+      }
+      stackBox.appendChild(div);
+    });
+  }
+
+  function typeChar() {
+    const input = document.getElementById("charInput");
+    const char = input.value.trim();
+
+    if (char.length === 1 && /^[a-zA-Z]$/.test(char)) {
+      current += char;
+      history.push(current);
+      input.value = "";
+      updateUI();
+    } else {
+      alert("Enter a valid a-z character.");
+    }
+  }
+
+  function undo() {
+    if (history.length > 1) {
+      history.pop();
+      current = history[history.length - 1];
+      updateUI();
+    }
+  }
+
+  updateUI(); // Initial call
+</script>
+
+</body>
+</html>
