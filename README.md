@@ -23,10 +23,3 @@ This project demonstrates a basic "Undo Operation Simulator" built using "HTML, 
 3. Click **Type** to add it.
 4. Click **Undo** to remove the last character.
 5. Watch the stack update in real-time!
-
-### ▶️ C++ Version
-
-1. Compile the code using g++ or any C++ compiler:
-   ```bash
-   g++ undo_simulator.cpp -o undo
-   ./undo
