@@ -14,8 +14,7 @@ This project demonstrates a basic "Undo Operation Simulator" built using "HTML, 
 - 💻 C++ version for terminal-based simulation
 
 ## Live Demo
-> [👉 Click here to view the live web version](#)  
-(*Host with GitHub Pages or Netlify if desired*)
+> https://kashish706.github.io/undo-operation-simulator/
 
 ## How to Use
 1. Open `index.html` in your browser.
