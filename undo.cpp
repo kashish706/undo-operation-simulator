@@ -1,8 +1,8 @@
 //Problem Statement:
-/* You are building a simple text editor simulator that supports two operations:
+/* I'm building a simple text editor simulator that supports two operations:
 Type Operation: Add a character to the end of the current string.
 Undo Operation: Undo the last type operation and restore the previous state of the string.
-You are given op operations to perform. Implement a program to simulate these operations 
+I'm given op operations to perform. Implement a program to simulate these operations
 and print the final state of the string after all operations are performed.*/
 
 
